@@ -90,6 +90,7 @@ typedef struct redisReplyObjectFunctions {
     void *(*createNil)(const redisReadTask*);
     void *(*createBool)(const redisReadTask*, int);
     void (*freeObject)(void*);
+    void (*coreFreeObject)(void*);
 } redisReplyObjectFunctions;
 
 typedef struct redisReader {

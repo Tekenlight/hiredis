@@ -72,6 +72,7 @@ static redisReplyObjectFunctions defaultFunctions = {
     createDoubleObject,
     createNilObject,
     createBoolObject,
+    freeReplyObject,
     freeReplyObject
 };
 

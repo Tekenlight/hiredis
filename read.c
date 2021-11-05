@@ -777,7 +777,7 @@ int redisReaderGetReply(redisReader *r, void **reply) {
         if (reply != NULL) {
             *reply = r->reply;
         } else if (r->reply != NULL && r->fn && r->fn->freeObject) {
-            r->fn->freeObject(r->reply);
+            r->fn->coreFreeObject(r->reply);
         }
         r->reply = NULL;
     }
