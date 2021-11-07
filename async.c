@@ -199,6 +199,7 @@ redisAsyncContext *redisAsyncConnectWithOptions(const redisOptions *options) {
 redisAsyncContext *redisAsyncConnect(const char *ip, int port) {
     redisOptions options = {0};
     REDIS_OPTIONS_SET_TCP(&options, ip, port);
+	options.
     return redisAsyncConnectWithOptions(&options);
 }
 
@@ -532,7 +533,7 @@ void redisProcessCallbacks(redisAsyncContext *ac) {
          * either RESP2 or RESP3 mode. */
         if (redisIsSpontaneousPushReply(reply)) {
             __redisRunPushCallback(ac, reply);
-            c->reader->fn->freeObject(reply);
+            if (c->reader->fn->freeObject) c->reader->fn->freeObject(reply);
             continue;
         }
 
@@ -557,7 +558,7 @@ void redisProcessCallbacks(redisAsyncContext *ac) {
             if (((redisReply*)reply)->type == REDIS_REPLY_ERROR) {
                 c->err = REDIS_ERR_OTHER;
                 snprintf(c->errstr,sizeof(c->errstr),"%s",((redisReply*)reply)->str);
-                c->reader->fn->freeObject(reply);
+                c->reader->fn->coreFreeObject(reply);
                 __redisAsyncDisconnect(ac);
                 return;
             }
@@ -569,7 +570,7 @@ void redisProcessCallbacks(redisAsyncContext *ac) {
 
         if (cb.fn != NULL) {
             __redisRunCallback(ac,&cb,reply);
-            c->reader->fn->freeObject(reply);
+            if (c->reader->fn->freeObject) c->reader->fn->freeObject(reply);
 
             /* Proceed with free'ing when redisAsyncFree() was called. */
             if (c->flags & REDIS_FREEING) {
@@ -581,7 +582,7 @@ void redisProcessCallbacks(redisAsyncContext *ac) {
              * or there were no callbacks to begin with. Either way, don't
              * abort with an error, but simply ignore it because the client
              * doesn't know what the server will spit out over the wire. */
-            c->reader->fn->freeObject(reply);
+            c->reader->fn->coreFreeObject(reply);
         }
     }
 

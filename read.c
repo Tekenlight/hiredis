@@ -53,8 +53,8 @@
 static void __redisReaderSetError(redisReader *r, int type, const char *str) {
     size_t len;
 
-    if (r->reply != NULL && r->fn && r->fn->freeObject) {
-        r->fn->freeObject(r->reply);
+    if (r->reply != NULL && r->fn && r->fn->coreFreeObject) {
+        r->fn->coreFreeObject(r->reply);
         r->reply = NULL;
     }
 
@@ -684,8 +684,8 @@ void redisReaderFree(redisReader *r) {
     if (r == NULL)
         return;
 
-    if (r->reply != NULL && r->fn && r->fn->freeObject)
-        r->fn->freeObject(r->reply);
+    if (r->reply != NULL && r->fn && r->fn->coreFreeObject)
+        r->fn->coreFreeObject(r->reply);
 
     if (r->task) {
         /* We know r->task[i] is allocated if i < r->tasks */
@@ -776,7 +776,7 @@ int redisReaderGetReply(redisReader *r, void **reply) {
     if (r->ridx == -1) {
         if (reply != NULL) {
             *reply = r->reply;
-        } else if (r->reply != NULL && r->fn && r->fn->freeObject) {
+        } else if (r->reply != NULL && r->fn && r->fn->coreFreeObject) {
             r->fn->coreFreeObject(r->reply);
         }
         r->reply = NULL;

@@ -41,6 +41,9 @@ SET(hiredis_sources
 
 SET(hiredis_sources ${hiredis_sources})
 
+set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING
+      "Choose the type of build, options are: None Debug Release" FORCE)
+
 IF(WIN32)
     ADD_COMPILE_DEFINITIONS(_CRT_SECURE_NO_WARNINGS WIN32_LEAN_AND_MEAN)
 ENDIF()
