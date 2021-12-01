@@ -131,7 +131,7 @@ static void redisLibevSetTimeout(void *privdata, struct timeval tv) {
     ((void)loop);
 
     if (!ev_is_active(&e->timer)) {
-        ev_init("TIMER", &e->timer, redisLibevTimeout);
+        ev_init("TIMER", (&(e->timer)), redisLibevTimeout);
         e->timer.data = e;
     }
 
