@@ -32,7 +32,7 @@
 #define __HIREDIS_LIBEV_H__
 #include <stdlib.h>
 #include <sys/types.h>
-#include <ev.h>
+#include <evlua/ev.h>
 #include "../hiredis.h"
 #include "../async.h"
 

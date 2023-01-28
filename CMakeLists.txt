@@ -101,31 +101,31 @@ include(CPack)
 
 INSTALL(TARGETS hiredis hiredis_static
     EXPORT hiredis-targets
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/evlua
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua)
 
 if (MSVC)
     INSTALL(FILES $<TARGET_PDB_FILE:hiredis>
-        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        DESTINATION ${CMAKE_INSTALL_BINDIR}/evlua
         CONFIGURATIONS Debug RelWithDebInfo)
     INSTALL(FILES $<TARGET_FILE_DIR:hiredis_static>/$<TARGET_FILE_BASE_NAME:hiredis_static>.pdb
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua
         CONFIGURATIONS Debug RelWithDebInfo)
 endif()
 
 # For NuGet packages
 INSTALL(FILES hiredis.targets
-    DESTINATION build/native)
+    DESTINATION build/native/evlua)
 
 INSTALL(FILES hiredis.h read.h sds.h async.h alloc.h
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evlua/hiredis)
 
 INSTALL(DIRECTORY adapters
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evlua/hiredis)
 
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis.pc
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua/pkgconfig)
 
 export(EXPORT hiredis-targets
     FILE "${CMAKE_CURRENT_BINARY_DIR}/hiredis-targets.cmake"
@@ -141,10 +141,10 @@ configure_package_config_file(hiredis-config.cmake.in ${CMAKE_CURRENT_BINARY_DIR
 INSTALL(EXPORT hiredis-targets
         FILE hiredis-targets.cmake
         NAMESPACE hiredis::
-        DESTINATION ${CMAKE_CONF_INSTALL_DIR})
+        DESTINATION ${CMAKE_CONF_INSTALL_DIR}/evlua)
 
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis-config.cmake
-        DESTINATION ${CMAKE_CONF_INSTALL_DIR})
+        DESTINATION ${CMAKE_CONF_INSTALL_DIR}/evlua)
 
 
 IF(ENABLE_SSL)
@@ -186,24 +186,24 @@ IF(ENABLE_SSL)
 
     INSTALL(TARGETS hiredis_ssl hiredis_ssl_static
         EXPORT hiredis_ssl-targets
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/evlua
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua)
 
     if (MSVC)
         INSTALL(FILES $<TARGET_PDB_FILE:hiredis_ssl>
-            DESTINATION ${CMAKE_INSTALL_BINDIR}
+            DESTINATION ${CMAKE_INSTALL_BINDIR}/evlua
             CONFIGURATIONS Debug RelWithDebInfo)
         INSTALL(FILES $<TARGET_FILE_DIR:hiredis_ssl_static>/$<TARGET_FILE_BASE_NAME:hiredis_ssl_static>.pdb
-            DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua
             CONFIGURATIONS Debug RelWithDebInfo)
     endif()
 
     INSTALL(FILES hiredis_ssl.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evlua/hiredis)
 
     INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis_ssl.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua/pkgconfig)
 
     export(EXPORT hiredis_ssl-targets
            FILE "${CMAKE_CURRENT_BINARY_DIR}/hiredis_ssl-targets.cmake"
@@ -217,10 +217,10 @@ IF(ENABLE_SSL)
     INSTALL(EXPORT hiredis_ssl-targets
         FILE hiredis_ssl-targets.cmake
         NAMESPACE hiredis::
-        DESTINATION ${CMAKE_CONF_INSTALL_DIR})
+        DESTINATION ${CMAKE_CONF_INSTALL_DIR}/evlua)
 
     INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis_ssl-config.cmake
-        DESTINATION ${CMAKE_CONF_INSTALL_DIR})
+        DESTINATION ${CMAKE_CONF_INSTALL_DIR}/evlua)
 ENDIF()
 
 IF(NOT DISABLE_TESTS)
