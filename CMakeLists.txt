@@ -124,8 +124,12 @@ INSTALL(FILES hiredis.h read.h sds.h async.h alloc.h
 INSTALL(DIRECTORY adapters
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evlua/hiredis)
 
+message(STATUS "++++++++")
+message(STATUS "${CMAKE_INSTALL_DATAROOTDIR}")
+message(STATUS "${CMAKE_INSTALL_PREFIX}")
+message(STATUS "++++++++")
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis.pc
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/evlua/pkgconfig)
+	DESTINATION ${CMAKE_INSTALL_LIBDIR}/../pkgconfig/evlua)
 
 export(EXPORT hiredis-targets
     FILE "${CMAKE_CURRENT_BINARY_DIR}/hiredis-targets.cmake"
