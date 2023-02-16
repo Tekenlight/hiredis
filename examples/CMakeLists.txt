@@ -10,13 +10,14 @@ if (GLIB2_FOUND)
 ENDIF(GLIB2_FOUND)
 
 FIND_PATH(LIBEV ev.h
-    HINTS /usr/local /usr/opt/local
+    HINTS /usr/local/include/evpoco /usr/opt/local/include/evpoco
     ENV LIBEV_INCLUDE_DIR)
 
 if (LIBEV)
     # Just compile and link with libev
+	find_library(LIBEV NAMES ev REQUIRED PATH_SUFFIXES "evpoco")
     ADD_EXECUTABLE(example-libev example-libev.c)
-    TARGET_LINK_LIBRARIES(example-libev ${HIREDIS_DEFAULT_LIBRARY} ev)
+	TARGET_LINK_LIBRARIES(example-libev ${HIREDIS_DEFAULT_LIBRARY} ${LIBEV})
 ENDIF()
 
 FIND_PATH(LIBEVENT event.h)
