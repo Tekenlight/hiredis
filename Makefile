@@ -178,7 +178,7 @@ hiredis-example-libevent-ssl: examples/example-libevent-ssl.c adapters/libevent.
 	$(CC) -o examples/$@ $(REAL_CFLAGS) -I. $< -levent $(STLIBNAME) $(SSL_STLIBNAME) $(REAL_LDFLAGS) $(SSL_LDFLAGS)
 
 hiredis-example-libev: examples/example-libev.c adapters/libev.h $(STLIBNAME)
-	$(CC) -o examples/$@ $(REAL_CFLAGS) -I. $< -lev $(STLIBNAME) $(REAL_LDFLAGS)
+	$(CC) -o examples/$@ $(REAL_CFLAGS) -I. $< -L/usr/local/lib/evpoco -lev $(STLIBNAME) $(REAL_LDFLAGS)
 
 hiredis-example-libhv: examples/example-libhv.c adapters/libhv.h $(STLIBNAME)
 	$(CC) -o examples/$@ $(REAL_CFLAGS) -I. $< -lhv $(STLIBNAME) $(REAL_LDFLAGS)
