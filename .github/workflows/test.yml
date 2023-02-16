@@ -24,7 +24,7 @@ jobs:
       run : |
         cd libev
         autoreconf -i
-        configure
+        ./configure
         make
         sudo make install
 
