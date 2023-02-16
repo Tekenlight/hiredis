@@ -16,6 +16,7 @@ FIND_PATH(LIBEV ev.h
 if (LIBEV)
     # Just compile and link with libev
 	find_library(LIBEV NAMES ev REQUIRED PATH_SUFFIXES "evpoco")
+	message(STATUS "FOUND LIBEV ${LIBEV}")
     ADD_EXECUTABLE(example-libev example-libev.c)
 	TARGET_LINK_LIBRARIES(example-libev ${HIREDIS_DEFAULT_LIBRARY} ${LIBEV})
 ENDIF()
