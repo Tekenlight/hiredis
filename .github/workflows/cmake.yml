@@ -23,6 +23,7 @@ jobs:
       with :
         repository: Tekenlight/libev
         path: libev
+
     - name: check the checkout
       run : |
         cd libev
@@ -30,6 +31,7 @@ jobs:
         ./configure
         make
         sudo make install
+
     - name : Install redis-server
       run: |
         curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
