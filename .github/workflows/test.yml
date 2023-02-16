@@ -15,8 +15,17 @@ jobs:
       REDIS_DOCKER: redis:alpine
 
     steps:
+    - name: Install CUSTOMIZED LIBEV
+      uses : actions/checkout@v3
+      with :
+        repository: Tekenlight/libev
+        path: libev
+    - name: check the checkout
+      run : ls -l libev
+
     - name: Install prerequisites
-      run: sudo apt-get update && sudo apt-get install -y libev-dev libevent-dev libglib2.0-dev libssl-dev valgrind
+      #run: sudo apt-get update && sudo apt-get install -y libev-dev libevent-dev libglib2.0-dev libssl-dev valgrind
+      run: sudo apt-get update && sudo apt-get install -y libevent-dev libglib2.0-dev libssl-dev valgrind
     - uses: actions/checkout@v3
     - name: Run make
       run: make all examples
