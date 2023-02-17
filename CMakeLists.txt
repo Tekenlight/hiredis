@@ -143,7 +143,7 @@ INSTALL(FILES hiredis.targets
     DESTINATION build/native/evpoco)
 
 INSTALL(FILES hiredis.h read.h sds.h async.h alloc.h sockcompat.h
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evpoco/hiredis)
 
 INSTALL(DIRECTORY adapters
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evpoco/hiredis)
