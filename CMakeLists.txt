@@ -130,10 +130,6 @@ INSTALL(FILES hiredis.h read.h sds.h async.h alloc.h sockcompat.h
 INSTALL(DIRECTORY adapters
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/evpoco/hiredis)
 
-message(STATUS "++++++++")
-message(STATUS "${CMAKE_INSTALL_DATAROOTDIR}")
-message(STATUS "${CMAKE_INSTALL_PREFIX}")
-message(STATUS "++++++++")
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis.pc
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/../pkgconfig/evpoco)
 
