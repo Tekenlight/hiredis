@@ -393,12 +393,12 @@ int redisvFormatCommand(char **target, const char *format, va_list ap) {
                     while (*_p != '\0' && strchr(flags,*_p) != NULL) _p++;
 
                     /* Field width */
-                    while (*_p != '\0' && isdigit(*_p)) _p++;
+                    while (*_p != '\0' && isdigit((int) *_p)) _p++;
 
                     /* Precision */
                     if (*_p == '.') {
                         _p++;
-                        while (*_p != '\0' && isdigit(*_p)) _p++;
+                        while (*_p != '\0' && isdigit((int) *_p)) _p++;
                     }
 
                     /* Copy va_list before consuming with va_arg */
@@ -952,6 +952,11 @@ int redisEnableKeepAliveWithInterval(redisContext *c, int interval) {
 /* Enable connection KeepAlive. */
 int redisEnableKeepAlive(redisContext *c) {
     return redisKeepAlive(c, REDIS_KEEPALIVE_INTERVAL);
+}
+
+/* Set the socket option TCP_USER_TIMEOUT. */
+int redisSetTcpUserTimeout(redisContext *c, unsigned int timeout) {
+    return redisContextSetTcpUserTimeout(c, timeout);
 }
 
 /* Set a user provided RESP3 PUSH handler and return any old one set. */
