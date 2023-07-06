@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0)
 
-OPTION(BUILD_SHARED_LIBS "Build shared libraries" ON)
+OPTION(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 OPTION(ENABLE_SSL "Build hiredis_ssl for SSL support" OFF)
 OPTION(DISABLE_TESTS "If tests should be compiled or not" OFF)
 OPTION(ENABLE_SSL_TESTS "Should we test SSL connections" OFF)
@@ -32,6 +32,9 @@ SET(CMAKE_DEBUG_POSTFIX d)
 #SET(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architectures for Mac OS X" FORCE)
 # set the value of CMAKE_OSX_ARCHITECTURES appropriately via -D commandline of cmake generation step
 #ENDIF (APPLE)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 SET(hiredis_sources
     alloc.c
