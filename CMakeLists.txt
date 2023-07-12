@@ -26,6 +26,7 @@ INCLUDE(GNUInstallDirs)
 
 # Hiredis requires C99
 SET(CMAKE_C_STANDARD 99)
+SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 #IF (APPLE)
@@ -33,8 +34,6 @@ SET(CMAKE_DEBUG_POSTFIX d)
 # set the value of CMAKE_OSX_ARCHITECTURES appropriately via -D commandline of cmake generation step
 #ENDIF (APPLE)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 SET(hiredis_sources
     alloc.c
